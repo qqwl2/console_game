@@ -69,8 +69,7 @@ Module_manager::synthesis(const int _first_index, const int _second_index) {
 }
 void
 Module_manager::remove_module(const int _id) {
-  auto iterator = std::remove_if(modules.begin(), modules.end(), [_id](const auto& module) {
+  auto iterator = std::erase_if(modules, [_id](const auto& module) {
     return module->get_id() == _id;
   });
-  modules.erase(iterator, modules.end());
 }

@@ -19,7 +19,6 @@ Robot_factory::create(const std::string& type, int id) {
     return iterator->second(id);
   }
   throw std::invalid_argument("Неизвестный тип робота: " + type);
-  return nullptr;
 }
 
 #include "src/entities/module/module_type/archive.hpp"
@@ -40,5 +39,4 @@ Module_factory::create(const std::string& type, int id) {
     return iterator->second(id);
   }
   throw std::invalid_argument("Неизвестный тип модуля" + type);
-  return nullptr;
 }

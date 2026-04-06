@@ -1,10 +1,17 @@
 INCLUDE = -I../../
-CCI = g++ -c $(INCLUDE) 
+CCI = g++ -c $(INCLUDE) -std=c++23
 
 all: main
 
-main: obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_manager.o obj/robot_manager.o obj/archive.o obj/command_center.o obj/generator.o obj/living_place.o obj/module.o obj/integrator.o obj/keeper.o obj/robot.o obj/event.o obj/factory.o obj/station.o obj/console_interface.o obj/ostream_operators.o obj/utils.o
-	g++ obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_manager.o obj/robot_manager.o obj/archive.o obj/command_center.o obj/generator.o obj/living_place.o obj/module.o obj/integrator.o obj/keeper.o obj/robot.o obj/event.o obj/factory.o obj/station.o obj/console_interface.o obj/ostream_operators.o obj/utils.o -o main
+main: obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_manager.o \
+	obj/robot_manager.o obj/archive.o obj/command_center.o obj/generator.o \
+	obj/living_place.o obj/module.o obj/integrator.o obj/keeper.o obj/robot.o \
+	obj/event.o obj/factory.o obj/station.o obj/console_interface.o \
+	obj/ostream_operators.o obj/utils.o
+	g++ obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_manager.o \
+	obj/robot_manager.o obj/archive.o obj/command_center.o obj/generator.o obj/living_place.o \
+	obj/module.o obj/integrator.o obj/keeper.o obj/robot.o obj/event.o obj/factory.o \
+	obj/station.o obj/console_interface.o obj/ostream_operators.o obj/utils.o -o main
 	@echo "the project is compiled"
 
 obj/default.o:

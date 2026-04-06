@@ -170,8 +170,8 @@ App::module_synthesis(Station& station, Iinterface& interface) {
                                                       second_module_menu - 1)) {
       station.get_events().add_events("Модуль был синтезирован");
     }
+    interface.delay(300);
   }
-  interface.delay(300);
 }
 int
 App::robot_synthesis(Station& station, Iinterface& interface) {
@@ -191,6 +191,6 @@ App::robot_synthesis(Station& station, Iinterface& interface) {
     } else if (station.get_robot_manager().synthesis(first_robot_menu - 1, second_robot_menu - 1)) {
       station.get_events().add_events("Робот был синтезирован");
     }
+    interface.delay(300);
   }
-  interface.delay(300);
 }

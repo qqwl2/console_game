@@ -15,11 +15,10 @@ Robot_manager::damage_robots() {
 }
 void
 Robot_manager::delete_corpse() {
-  auto iterator = std::remove_if(robots.begin(), robots.end(), [](const auto& robot) {
+  auto iterator = std::erase_if(robots, [](const auto& robot) {
     return robot->get_chassis_integrity() <= INTEGRITY_MIN ||
            robot->get_firmware_integrity() <= INTEGRITY_MIN;
   });
-  robots.erase(iterator, robots.end());
 }
 void
 Robot_manager::repair_robots(Resources_manager& resources_manager) {
@@ -91,7 +90,6 @@ Robot_manager::synthesis(const int _first_index, const int _second_index) {
 }
 void
 Robot_manager::remove_robot(const int _id) {
-  auto iterator = std::remove_if(
-    robots.begin(), robots.end(), [_id](const auto& robot) { return robot->get_id() == _id; });
-  robots.erase(iterator, robots.end());
+  auto iterator =
+    std::erase_if(robots, [_id](const auto& robot) { return robot->get_id() == _id; });
 }
