@@ -1,8 +1,8 @@
 #include "generator.hpp"
 #include <include/utils/constants.hpp>
 
-Generator::Generator(int id)
-  : Module(id) {
+Generator::Generator(int _id)
+  : Module(_id) {
   energy = 40;
 }
 void
@@ -11,7 +11,7 @@ Generator::upgrade() {
   energy += 10;
   upgrade_cost *= UPGRADE_COST_FACTOR;
 }
-const std::string
+std::string
 Generator::get_name() const {
   return "Generator";
 }

@@ -1,8 +1,8 @@
 #include "archive.hpp"
 #include <include/utils/constants.hpp>
 
-Archive::Archive(int id)
-  : Module(id) {
+Archive::Archive(int _id)
+  : Module(_id) {
   energy = -5;
   bits = 5;
 }
@@ -13,7 +13,7 @@ Archive::upgrade() {
   bits += 5;
   upgrade_cost *= UPGRADE_COST_FACTOR;
 }
-const std::string
+std::string
 Archive::get_name() const {
   return "Archive";
 }

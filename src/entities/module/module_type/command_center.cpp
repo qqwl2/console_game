@@ -1,8 +1,8 @@
 #include "command_center.hpp"
 #include <include/utils/constants.hpp>
 
-Command_center::Command_center(int id)
-  : Module(id) {
+Command_center::Command_center(int _id)
+  : Module(_id) {
   energy = -50;
 }
 void
@@ -12,10 +12,11 @@ Command_center::upgrade() {
   bits += 5;
   upgrade_cost *= UPGRADE_COST_FACTOR;
 }
-const std::string
+std::string
 Command_center::get_name() const {
   return "Command center";
 }
-int Command_center::toggle_active(){
+int
+Command_center::toggle_active() {
   return 0;
 }

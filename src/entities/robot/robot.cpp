@@ -3,8 +3,8 @@
 #include <include/utils/constants.hpp>
 #include <memory>
 
-Robot::Robot(const int id, const float resources_efficiency)
-  : id(id)
+Robot::Robot(const int _id, const float _resources_efficiency)
+  : id(_id)
   , name("")
   , chassis_integrity(INTEGRITY_MAX)
   , firmware_integrity(INTEGRITY_MAX)
@@ -12,34 +12,34 @@ Robot::Robot(const int id, const float resources_efficiency)
   , energy(0)
   , bits(0)
   , occupied_place(0)
-  , resources_efficiency(resources_efficiency)
+  , resources_efficiency(_resources_efficiency)
   , day(0) {}
 
-const int
+int
 Robot::get_chassis_integrity() const {
   return chassis_integrity;
 }
-const int
+int
 Robot::get_firmware_integrity() const {
   return firmware_integrity;
 }
-const int
+int
 Robot::get_energy() const {
   return energy;
 }
-const int
+int
 Robot::get_bits() const {
   return bits;
 }
-const int
+int
 Robot::get_occupied_place() const {
   return occupied_place;
 }
-const int
+int
 Robot::get_id() const {
   return id;
 }
-const int
+int
 Robot::get_day() const {
   return day;
 }
@@ -77,8 +77,9 @@ Robot::operator++() {
 }
 int
 Robot::operator+(Robot& robot) {
-  int synthesis_energy = (this->energy + robot.energy) / 2.0 * random(0.8, 1.2);
-  int synthesis_bits = (this->bits + robot.bits) / 2.0 * random(0.8, 1.2);
+  int rand_mult = static_cast<int>(2.0 * random(0.8, 1.2));
+  int synthesis_energy = (this->energy + robot.energy) / rand_mult;
+  int synthesis_bits = (this->bits + robot.bits) / rand_mult;
   if (this->bits + this->energy >= robot.bits + robot.energy) {
     this->bits = synthesis_bits;
     this->energy = synthesis_energy;

@@ -6,8 +6,8 @@ private:
   int alive_places;
 
 public:
-  Living_place(int id);
-  void              upgrade() override;
-  const std::string get_name() const override;
-  const int         get_alive_places() const override;
+  Living_place(int _id);
+  void        upgrade() override;
+  std::string get_name() const override;
+  int         get_alive_places() const override;
 };

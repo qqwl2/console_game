@@ -23,11 +23,11 @@ Resources_manager::add_bits(const int _bits) {
     bits = 0;
   }
 }
-const int
+int
 Resources_manager::get_energy() const {
   return energy;
 }
-const int
+int
 Resources_manager::get_bits() const {
   return bits;
 }

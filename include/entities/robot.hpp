@@ -19,16 +19,16 @@ protected:
   unsigned int day;
 
 public:
-  Robot(const int id, const float resources_efficiency);
+  Robot(const int _id, const float _resources_efficiency);
   virtual std::string get_type_str() const = 0;
-  const int           get_chassis_integrity() const;
-  const int           get_firmware_integrity() const;
-  const int           get_energy() const;
-  const int           get_bits() const;
-  const int           get_occupied_place() const;
+  int                 get_chassis_integrity() const;
+  int                 get_firmware_integrity() const;
+  int                 get_energy() const;
+  int                 get_bits() const;
+  int                 get_occupied_place() const;
   void                set_is_homeless(const bool data);
-  const int           get_id() const;
-  const int           get_day() const;
+  int                 get_id() const;
+  int                 get_day() const;
   void                new_day();
   Robot&              operator--();
   Robot&              operator++();

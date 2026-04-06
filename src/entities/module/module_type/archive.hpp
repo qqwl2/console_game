@@ -3,7 +3,7 @@
 
 class Archive : public Module {
 public:
-  Archive(int id);
+  Archive(int _id);
   void        upgrade() override;
-  const std::string get_name() const override;
+  std::string get_name() const override;
 };

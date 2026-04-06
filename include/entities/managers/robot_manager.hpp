@@ -14,15 +14,15 @@ private:
   int robot_id;
 
 public:
-  void      add_robot(Robot_factory& robot_factory, const std::string type);
-  void      damage_robots();
-  void      delete_corpse();
-  void      repair_robots(Resources_manager& resources_manager);
-  void      robot_new_day();
-  void      robot_placement(const int living_places);
-  const int calculate_energy();
-  const int calculate_bits();
-  const int get_number_of_robots() const;
-  int       synthesis(const int _first_index, const int _second_index);
-  void      remove_robot(const int _id);
+  void              add_robot(Robot_factory& robot_factory, const std::string type);
+  void              damage_robots();
+  void              delete_corpse();
+  void              repair_robots(Resources_manager& resources_manager);
+  void              robot_new_day();
+  void              robot_placement(const int living_places);
+  int               calculate_energy();
+  int               calculate_bits();
+  long unsigned int get_number_of_robots() const;
+  int               synthesis(const int _first_index, const int _second_index);
+  void              remove_robot(const int _id);
 };

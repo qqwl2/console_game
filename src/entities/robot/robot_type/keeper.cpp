@@ -10,11 +10,11 @@ generate_keeper_name() {
   return name;
 }
 
-Keeper::Keeper(const int id, const float resources_efficiency)
-  : Robot(id, resources_efficiency) {
+Keeper::Keeper(const int _id, const float _resources_efficiency)
+  : Robot(_id, _resources_efficiency) {
   name = generate_keeper_name();
-  bits = 10 * resources_efficiency;
-  energy = 5 * resources_efficiency;
+  bits = static_cast<int>(10.0 * resources_efficiency);
+  energy = static_cast<int>(5.0 * resources_efficiency);
   occupied_place = 2;
 }
 std::string

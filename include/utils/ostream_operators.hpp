@@ -22,4 +22,4 @@ operator<<(std::ostream& os, const Resources_manager& resources_manager);
 std::ostream&
 operator<<(std::ostream& os, const Module_manager& module_manager);
 std::ostream&
-operator<<(std::ostream& os, const Event& event);
+operator<<(std::ostream& os, const Event& events);

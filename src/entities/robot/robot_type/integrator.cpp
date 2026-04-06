@@ -10,11 +10,11 @@ generate_integrator_name() {
   return name;
 }
 
-Integrator::Integrator(const int id, const float resources_efficiency)
-  : Robot(id, resources_efficiency) {
+Integrator::Integrator(const int _id, const float _resources_efficiency)
+  : Robot(_id, _resources_efficiency) {
   name = generate_integrator_name();
-  bits = 5 * resources_efficiency;
-  energy = 10 * resources_efficiency;
+  bits = static_cast<int>(5.0 * resources_efficiency);
+  energy = static_cast<int>(10.0 * resources_efficiency);
   occupied_place = 1;
 }
 std::string

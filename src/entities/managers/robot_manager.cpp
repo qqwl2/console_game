@@ -15,14 +15,13 @@ Robot_manager::damage_robots() {
 }
 void
 Robot_manager::delete_corpse() {
-  auto iterator = std::erase_if(robots, [](const auto& robot) {
+  std::erase_if(robots, [](const auto& robot) {
     return robot->get_chassis_integrity() <= INTEGRITY_MIN ||
            robot->get_firmware_integrity() <= INTEGRITY_MIN;
   });
 }
 void
 Robot_manager::repair_robots(Resources_manager& resources_manager) {
-  int cost = 0;
   for (auto& robot : robots) {
     if (robot->get_chassis_integrity() < INTEGRITY_MAX / 2 ||
         robot->get_firmware_integrity() < INTEGRITY_MAX / 2) {
@@ -53,7 +52,7 @@ Robot_manager::robot_placement(const int living_places) {
     }
   }
 }
-const int
+int
 Robot_manager::calculate_energy() {
   int total = 0;
   for (auto& robot : robots) {
@@ -61,7 +60,7 @@ Robot_manager::calculate_energy() {
   }
   return total;
 }
-const int
+int
 Robot_manager::calculate_bits() {
   int total = 0;
   for (auto& robot : robots) {
@@ -69,7 +68,7 @@ Robot_manager::calculate_bits() {
   }
   return total;
 }
-const int
+long unsigned int
 Robot_manager::get_number_of_robots() const {
   return robots.size();
 }
@@ -90,6 +89,5 @@ Robot_manager::synthesis(const int _first_index, const int _second_index) {
 }
 void
 Robot_manager::remove_robot(const int _id) {
-  auto iterator =
-    std::erase_if(robots, [_id](const auto& robot) { return robot->get_id() == _id; });
+  std::erase_if(robots, [_id](const auto& robot) { return robot->get_id() == _id; });
 }

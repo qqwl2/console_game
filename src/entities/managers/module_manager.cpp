@@ -6,7 +6,7 @@ Module_manager::add_module(Module_factory& module_factory, const std::string typ
   modules.push_back(module_factory.create(type, module_id++));
 }
 
-const int
+int
 Module_manager::calculate_energy() {
   int total = 0;
   for (auto& module : modules) {
@@ -14,7 +14,7 @@ Module_manager::calculate_energy() {
   }
   return total;
 }
-const int
+int
 Module_manager::calculate_bits() {
   int total = 0;
   for (auto& module : modules) {
@@ -22,7 +22,7 @@ Module_manager::calculate_bits() {
   }
   return total;
 }
-const int
+int
 Module_manager::calculate_alive_places() {
   int total = 0;
   for (auto& module : modules) {
@@ -30,7 +30,7 @@ Module_manager::calculate_alive_places() {
   }
   return total;
 }
-const int
+long unsigned int
 Module_manager::get_number_of_modules() const {
   return modules.size();
 }
@@ -69,7 +69,5 @@ Module_manager::synthesis(const int _first_index, const int _second_index) {
 }
 void
 Module_manager::remove_module(const int _id) {
-  auto iterator = std::erase_if(modules, [_id](const auto& module) {
-    return module->get_id() == _id;
-  });
+  std::erase_if(modules, [_id](const auto& module) { return module->get_id() == _id; });
 }

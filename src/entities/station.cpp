@@ -56,7 +56,7 @@ Station::new_day() {
 int
 Station::calculate_signal_chance() {
   int total_power = module_manager.calculate_energy() + robot_manager.calculate_energy();
-  int interference = robot_manager.get_number_of_robots() * INTERFERENCE_FACTOR;
+  int interference = static_cast<int>(robot_manager.get_number_of_robots()) * INTERFERENCE_FACTOR;
   int probability = (100 * total_power) / (total_power + interference + 1);
   if (probability < 0) {
     probability = 0;

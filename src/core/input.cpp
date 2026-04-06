@@ -3,11 +3,11 @@
 #include <limits>
 
 int
-menu_request(const int min, const int max) {
+menu_request(const int min, const unsigned long int max) {
   int data = 0;
   while (1) {
     std::cin >> data;
-    if (std::cin.fail() || data > max || data < min) {
+    if (std::cin.fail() || data > static_cast<int> (max) || data < min) {
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       continue;

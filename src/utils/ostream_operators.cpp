@@ -69,9 +69,9 @@ operator<<(std::ostream& os, const Module_manager& module_manager) {
   return os;
 }
 std::ostream&
-operator<<(std::ostream& os, const Event& event) {
+operator<<(std::ostream& os, const Event& events) {
   os << "                [СОБЫТИЯ]" << std::endl;
-  for (auto& event : event.events) {
+  for (auto& event : events.events) {
     os << event << std::endl;
   }
   return os;

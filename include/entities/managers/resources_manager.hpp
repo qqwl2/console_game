@@ -14,6 +14,6 @@ public:
   Resources_manager(int _energy, int _bits, int _energy_max, int _bits_max);
   void add_energy(const int _energy);
   void add_bits(const int _bits);
-  const int  get_energy() const;
-  const int  get_bits() const;
+  int  get_energy() const;
+  int  get_bits() const;
 };

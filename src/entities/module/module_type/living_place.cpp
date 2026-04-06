@@ -3,8 +3,8 @@
 
 constexpr int ALIVE_PLACES = 8;
 
-Living_place::Living_place(int id)
-  : Module(id)
+Living_place::Living_place(int _id)
+  : Module(_id)
   , alive_places(ALIVE_PLACES) {}
 void
 Living_place::upgrade() {
@@ -12,11 +12,11 @@ Living_place::upgrade() {
   alive_places += 2;
   upgrade_cost *= UPGRADE_COST_FACTOR;
 }
-const std::string
+std::string
 Living_place::get_name() const {
   return "Living place";
 }
-const int
+int
 Living_place::get_alive_places() const {
   if (is_active) {
     return alive_places;

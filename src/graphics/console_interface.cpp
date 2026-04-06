@@ -53,7 +53,7 @@ Console_interface::panel_module_upgrade(Station& station) {
   std::cout << "Введите номер модуля для улучшения: " << std::endl;
 }
 void
-Console_interface::panel_module_purchase(Station& station, int energy_cost, int bits_cost) {
+Console_interface::panel_module_purchase(int energy_cost, int bits_cost) {
   std::cout << "[1] Архив           : " << energy_cost << " энергии и " << bits_cost << " битов"
             << std::endl;
   std::cout << "[2] Командный центр : " << energy_cost << " энергии и " << bits_cost << " битов"
@@ -66,7 +66,7 @@ Console_interface::panel_module_purchase(Station& station, int energy_cost, int 
   std::cout << "Введите номер опции: " << std::endl;
 }
 void
-Console_interface::panel_robot_purchase(Station& station, int energy_cost, int bits_cost) {
+Console_interface::panel_robot_purchase(int energy_cost, int bits_cost) {
   std::cout << "[1] Keeper     : " << energy_cost << " энергии и " << bits_cost << " битов"
             << std::endl;
   std::cout << "[2] Integrator : " << energy_cost << " энергии и " << bits_cost << " битов"
@@ -83,7 +83,7 @@ Console_interface::bad_end() {
   std::cout << "смерть" << std::endl;
 }
 int
-Console_interface::request_value(int min, int max) {
+Console_interface::request_value(int min, const unsigned long int max) {
   return menu_request(min, max);
 }
 void

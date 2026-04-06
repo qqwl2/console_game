@@ -1,5 +1,6 @@
 INCLUDE = -I../../
-CCI = g++ -c $(INCLUDE) -std=c++23
+DEBUG_FLAGS = -Wall -Wextra -Wpedantic -Werror -Wshadow -Wconversion -Wunused-variable -Wduplicated-cond
+CCI = g++ -c $(INCLUDE) -std=c++23 $(DEBUG_FLAGS)
 
 all: main
 

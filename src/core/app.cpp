@@ -86,7 +86,7 @@ App::module_purchase(Station& station, Iinterface& interface) {
   int module_purchase_menu = 0;
   for (;;) {
     interface.clear();
-    interface.panel_module_purchase(station, PURCHASE_COST, PURCHASE_COST);
+    interface.panel_module_purchase(PURCHASE_COST, PURCHASE_COST);
     module_purchase_menu = interface.request_value(0, 4);
     switch (module_purchase_menu) {
       case 0:
@@ -128,7 +128,7 @@ App::robot_purchase(Station& station, Iinterface& interface) {
   int robot_purchase_menu = 0;
   for (;;) {
     interface.clear();
-    interface.panel_robot_purchase(station, PURCHASE_COST, PURCHASE_COST);
+    interface.panel_robot_purchase(PURCHASE_COST, PURCHASE_COST);
     robot_purchase_menu = interface.request_value(0, 2);
     switch (robot_purchase_menu) {
       case 0:

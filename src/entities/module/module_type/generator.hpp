@@ -3,7 +3,7 @@
 
 class Generator : public Module {
 public:
-  Generator(int id);
+  Generator(int _id);
   void        upgrade() override;
-  const std::string get_name() const override;
+  std::string get_name() const override;
 };

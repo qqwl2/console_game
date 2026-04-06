@@ -3,8 +3,8 @@
 
 class Command_center : public Module {
 public:
-  Command_center(int id);
-  void              upgrade() override;
-  const std::string get_name() const override;
-  int               toggle_active() override;
+  Command_center(int _id);
+  void        upgrade() override;
+  std::string get_name() const override;
+  int         toggle_active() override;
 };
