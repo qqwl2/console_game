@@ -14,9 +14,8 @@ Robot_factory::Robot_factory() {
 }
 std::unique_ptr<Robot>
 Robot_factory::create(const std::string& type, int id) {
-  auto iterator = creators.find(type);
-  if (iterator != creators.end()) {
-    return iterator->second(id);
+  if (creators.contains(type)) {
+    return creators[type](id);
   }
   throw std::invalid_argument("Неизвестный тип робота: " + type);
 }
@@ -34,9 +33,8 @@ Module_factory::Module_factory() {
 }
 std::unique_ptr<Module>
 Module_factory::create(const std::string& type, int id) {
-  auto iterator = creators.find(type);
-  if (iterator != creators.end()) {
-    return iterator->second(id);
+  if (creators.contains(type)) {
+    return creators[type](id);
   }
   throw std::invalid_argument("Неизвестный тип модуля" + type);
 }

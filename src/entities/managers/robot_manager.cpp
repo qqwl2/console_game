@@ -9,9 +9,7 @@ Robot_manager::add_robot(Robot_factory& robot_factory, const std::string type) {
 
 void
 Robot_manager::damage_robots() {
-  for (auto& robot : robots) {
-    --*robot;
-  }
+  std::for_each(robots.begin(), robots.end(), [](auto& robot) { --*robot; });
 }
 void
 Robot_manager::delete_corpse() {
@@ -36,9 +34,7 @@ Robot_manager::repair_robots(Resources_manager& resources_manager) {
 }
 void
 Robot_manager::robot_new_day() {
-  for (auto& robot : robots) {
-    robot->new_day();
-  }
+  std::for_each(robots.begin(), robots.end(), [](auto& robot) { robot->new_day(); });
 }
 void
 Robot_manager::robot_placement(const int living_places) {
@@ -54,19 +50,13 @@ Robot_manager::robot_placement(const int living_places) {
 }
 int
 Robot_manager::calculate_energy() {
-  int total = 0;
-  for (auto& robot : robots) {
-    total += robot->get_energy();
-  }
-  return total;
+  return std::ranges::fold_left(
+    robots, 0, [](int sum, const auto& robot) { return sum + robot->get_energy(); });
 }
 int
 Robot_manager::calculate_bits() {
-  int total = 0;
-  for (auto& robot : robots) {
-    total += robot->get_bits();
-  }
-  return total;
+  return std::ranges::fold_left(
+    robots, 0, [](int sum, const auto& robot) { return sum + robot->get_bits(); });
 }
 long unsigned int
 Robot_manager::get_number_of_robots() const {

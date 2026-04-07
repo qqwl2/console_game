@@ -1,6 +1,6 @@
 INCLUDE = -I../../
 DEBUG_FLAGS = -Wall -Wextra -Wpedantic -Werror -Wshadow -Wconversion -Wunused-variable -Wduplicated-cond
-CCI = g++ -c $(INCLUDE) -std=c++23 $(DEBUG_FLAGS)
+CCI = @g++ -c $(INCLUDE) -std=c++23 
 
 all: main
 
@@ -9,7 +9,7 @@ main: obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_man
 	obj/living_place.o obj/module.o obj/integrator.o obj/keeper.o obj/robot.o \
 	obj/event.o obj/factory.o obj/station.o obj/console_interface.o \
 	obj/ostream_operators.o obj/utils.o
-	g++ obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_manager.o \
+	@g++ obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_manager.o \
 	obj/robot_manager.o obj/archive.o obj/command_center.o obj/generator.o obj/living_place.o \
 	obj/module.o obj/integrator.o obj/keeper.o obj/robot.o obj/event.o obj/factory.o \
 	obj/station.o obj/console_interface.o obj/ostream_operators.o obj/utils.o -o main

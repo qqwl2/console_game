@@ -8,27 +8,18 @@ Module_manager::add_module(Module_factory& module_factory, const std::string typ
 
 int
 Module_manager::calculate_energy() {
-  int total = 0;
-  for (auto& module : modules) {
-    total += module->get_energy();
-  }
-  return total;
+  return std::ranges::fold_left(
+    modules, 0, [](int sum, const auto& module) { return sum + module->get_energy(); });
 }
 int
 Module_manager::calculate_bits() {
-  int total = 0;
-  for (auto& module : modules) {
-    total += module->get_bits();
-  }
-  return total;
+  return std::ranges::fold_left(
+    modules, 0, [](int sum, const auto& module) { return sum + module->get_bits(); });
 }
 int
 Module_manager::calculate_alive_places() {
-  int total = 0;
-  for (auto& module : modules) {
-    total += module->get_alive_places();
-  }
-  return total;
+  return std::ranges::fold_left(
+    modules, 0, [](int sum, const auto& module) { return sum + module->get_alive_places(); });
 }
 long unsigned int
 Module_manager::get_number_of_modules() const {
@@ -52,7 +43,7 @@ Module_manager::module_upgrade(Resources_manager& resources_manager, const int _
 }
 int
 Module_manager::module_toggle(const int _index) {
-  return modules[_index]->toggle_active();
+  modules[_index]->toggle_active();
   return 0;
 }
 int
