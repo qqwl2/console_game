@@ -1,5 +1,6 @@
 /build/default/obj
 /build/default/main
+/build/default/main_debug
 /.clang-format
 /tests/*
 /tests
