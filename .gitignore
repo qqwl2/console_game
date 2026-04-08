@@ -2,3 +2,4 @@
 /build/default/main
 /.clang-format
 /tests/*
+/tests
