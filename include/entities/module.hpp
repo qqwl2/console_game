@@ -25,6 +25,7 @@ public:
   virtual int         get_alive_places() const;
   int                 get_upgrade_cost() const;
   int                 get_id() const;
+  int                 get_level() const;
   Module*             operator+(const Module& _module);
   virtual ~Module() = default;
 };

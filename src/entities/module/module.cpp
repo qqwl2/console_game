@@ -46,6 +46,11 @@ int
 Module::get_id() const {
   return id;
 }
+int
+Module::get_level() const {
+  return level;
+}
+// вынужденная мера, чтобы не портить архитектуру
 Module*
 Module::operator+(const Module& _module) {
   if (this->get_name() == _module.get_name() && this->level == _module.level) {
