@@ -26,4 +26,6 @@ public:
   int               synthesis(const int _first_index, const int _second_index);
   void              remove_robot(const int _id);
   void              damage_firmware(int damage);
+  void              sort_robots();
+  int               loss_assessment() const;
 };

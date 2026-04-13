@@ -62,3 +62,7 @@ void
 Module_manager::remove_module(const int _id) {
   std::erase_if(modules, [_id](const auto& module) { return module->get_id() == _id; });
 }
+void
+Module_manager::sort_modules() {
+  std::ranges::sort(modules, std::less{}, [](const auto& module) { return module->get_name(); });
+}

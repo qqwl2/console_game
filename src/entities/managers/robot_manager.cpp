@@ -81,9 +81,17 @@ void
 Robot_manager::remove_robot(const int _id) {
   std::erase_if(robots, [_id](const auto& robot) { return robot->get_id() == _id; });
 }
-
 void
 Robot_manager::damage_firmware(int damage) {
   std::for_each(
     robots.begin(), robots.end(), [damage](auto& robot) { robot->damage_firmware(damage); });
+}
+void
+Robot_manager::sort_robots() {
+  std::ranges::sort(robots, std::less{}, [](const auto& robot) { return robot->get_name(); });
+}
+int
+Robot_manager::loss_assessment() const {
+  return static_cast<int>(std::ranges::count_if(
+    robots, [](const auto& robot) { return robot->get_chassis_integrity() < 50; }));
 }

@@ -14,6 +14,10 @@ class Console_interface : public Iinterface {
   void module_synthesis(Station& station) override;
   void robot_synthesis(Station& station) override;
   void problem_output(std::string problem) override;
+  void analytics() override;
+  void roll_call(Station& station) override;
+  void inventory(Station& station) override;
+  void loss_assessment(Station& station) override;
 
   int request_value(int min, const unsigned long int max) override;
 };

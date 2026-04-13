@@ -34,5 +34,6 @@ public:
   Robot&              operator++();
   int                 operator+(Robot& robot);
   void                damage_firmware(int damage);
+  std::string         get_name() const;
   virtual ~Robot() = default;
 };

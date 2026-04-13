@@ -100,7 +100,7 @@ Station::new_day() {
   } catch (const Meteor_strike_exception& e) {
     events.add_events(e.what(), day);
     module_manager.module_toggle(
-      static_cast<int>(random(0, module_manager.get_number_of_modules())));
+      static_cast<int>(random(0, static_cast<double>(module_manager.get_number_of_modules()))));
   }
   if (resources_manager.get_bits() <= 0 || resources_manager.get_energy() <= 0) {
     return 0;
@@ -109,6 +109,9 @@ Station::new_day() {
 }
 int
 Station::calculate_signal_chance() {
+  if (storm_days) {
+    return 0;
+  }
   int total_power = module_manager.calculate_energy() + robot_manager.calculate_energy();
   int interference = static_cast<int>(robot_manager.get_number_of_robots()) * INTERFERENCE_FACTOR;
   int probability = (100 * total_power) / (total_power + interference + 1);

@@ -9,7 +9,7 @@ App::run(Station& station, Iinterface& interface) {
   for (;;) {
     interface.clear();
     interface.update_main(station);
-    menu = interface.request_value(0, 7);
+    menu = interface.request_value(0, 8);
     switch (menu) {
       case 0:
         exit(EXIT_SUCCESS);
@@ -39,6 +39,9 @@ App::run(Station& station, Iinterface& interface) {
         break;
       case 7:
         robot_synthesis(station, interface);
+        break;
+      case 8:
+        analytics(station, interface);
         break;
     }
   }
@@ -193,4 +196,51 @@ App::robot_synthesis(Station& station, Iinterface& interface) {
     }
     interface.delay(300);
   }
+}
+void
+App::analytics(Station& station, Iinterface& interface) {
+  for (;;) {
+    interface.clear();
+    interface.analytics();
+    int request = interface.request_value(0, 3);
+    switch (request) {
+      case 0:
+        return;
+      case 1:
+        roll_call(station, interface);
+        break;
+      case 2:
+        inventory(station, interface);
+        break;
+      case 3:
+        loss_assessment(station, interface);
+        break;
+    }
+  }
+}
+void
+App::roll_call(Station& station, Iinterface& interface) {
+  interface.clear();
+  station.get_robot_manager().sort_robots();
+  interface.roll_call(station);
+  int request = interface.request_value(0, 0);
+  if (!request) {
+    return;
+  }
+}
+void
+App::inventory(Station& station, Iinterface& interface) {
+  interface.clear();
+  station.get_module_manager().sort_modules();
+  interface.inventory(station);
+  int request = interface.request_value(0, 0);
+  if (!request) {
+    return;
+  }
+}
+void
+App::loss_assessment(Station& station, Iinterface& interface) {
+  interface.loss_assessment(station);
+  interface.delay(500);
+  return;
 }

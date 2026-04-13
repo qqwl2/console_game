@@ -11,4 +11,8 @@ public:
   int robot_purchase(Station& station, Iinterface& interface);
   int module_synthesis(Station& station, Iinterface& interface);
   int robot_synthesis(Station& station, Iinterface& interface);
+  void analytics(Station& station, Iinterface& interface);
+  void roll_call(Station& station, Iinterface& interface);
+  void inventory(Station& station, Iinterface& interface);
+  void loss_assessment(Station& station, Iinterface& interface);
 };

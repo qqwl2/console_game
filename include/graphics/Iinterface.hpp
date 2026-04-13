@@ -15,6 +15,10 @@ public:
   virtual void module_synthesis(Station& station) = 0;
   virtual void robot_synthesis(Station& station) = 0;
   virtual void problem_output(std::string problem) = 0;
+  virtual void analytics() = 0;
+  virtual void roll_call(Station& station) = 0;
+  virtual void inventory(Station& station) = 0;
+  virtual void loss_assessment(Station& station) = 0;
 
   virtual int request_value(const int min, const unsigned long int max) = 0;
 };

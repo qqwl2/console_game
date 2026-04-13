@@ -16,6 +16,7 @@ frame_menu() {
   std::cout << "| 5. Управление модулями                                   |" << std::endl;
   std::cout << "| 6. Модульная сборка                                      |" << std::endl;
   std::cout << "| 7. Синтез сознания                                       |" << std::endl;
+  std::cout << "| 8. Аналитика                                             |" << std::endl;
   std::cout << "| 0. Выход                                                 |" << std::endl;
   std::cout << "Выберите команду > " << std::endl;
 }
@@ -101,4 +102,26 @@ Console_interface::robot_synthesis(Station& station) {
 void
 Console_interface::problem_output(std::string problem) {
   std::cout << problem << std::endl;
+}
+void
+Console_interface::analytics() {
+  std::cout << "1. Перекличка" << std::endl;
+  std::cout << "2. Инвентаризация" << std::endl;
+  std::cout << "3. Оценка потерь" << std::endl;
+  std::cout << "0. Выход" << std::endl;
+}
+void
+Console_interface::roll_call(Station& station) {
+  std::cout << station.get_robot_manager();
+  std::cout << "0. Выход" << std::endl;
+}
+void
+Console_interface::inventory(Station& station) {
+  std::cout << station.get_module_manager();
+  std::cout << "0. Выход" << std::endl;
+}
+void
+Console_interface::loss_assessment(Station& station) {
+  std::cout << "Количество поврежденных роботов: " << station.get_robot_manager().loss_assessment()
+            << std::endl;
 }

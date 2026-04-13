@@ -97,3 +97,7 @@ Robot::damage_firmware(int damage) {
     firmware_integrity = INTEGRITY_MIN;
   }
 }
+std::string
+Robot::get_name() const {
+  return name;
+}

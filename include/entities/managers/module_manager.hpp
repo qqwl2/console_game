@@ -24,4 +24,5 @@ public:
   int               module_toggle(const int _index);
   int               synthesis(const int _first_index, const int _second_index);
   void              remove_module(const int _id);
+  void              sort_modules();
 };
