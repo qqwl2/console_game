@@ -9,7 +9,7 @@ class Module_manager {
   friend std::ostream& operator<<(std::ostream& os, const Module_manager& module_manager);
 
 private:
-  std::vector<std::unique_ptr<Module>> modules;
+  std::vector<std::shared_ptr<Module>> modules;
 
   int module_id;
 

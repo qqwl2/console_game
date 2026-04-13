@@ -5,10 +5,10 @@
 #include <memory>
 #include <unordered_map>
 
-template<typename Product>
+template<typename Product, template<typename> class ptr_type = std::unique_ptr>
 class Factory {
 public:
-  virtual std::unique_ptr<Product> create(const std::string& type, int id) = 0;
+  virtual ptr_type<Product> create(const std::string& type, int id) = 0;
   virtual ~Factory() = default;
 };
 
@@ -21,11 +21,11 @@ public:
   std::unique_ptr<Robot> create(const std::string& type, int id) override;
 };
 
-class Module_factory : public Factory<Module> {
+class Module_factory : public Factory<Module, std::shared_ptr> {
 private:
-  std::unordered_map<std::string, std::function<std::unique_ptr<Module>(int id)>> creators;
+  std::unordered_map<std::string, std::function<std::shared_ptr<Module>(int id)>> creators;
 
 public:
   Module_factory();
-  std::unique_ptr<Module> create(const std::string& type, int id) override;
+  std::shared_ptr<Module> create(const std::string& type, int id) override;
 };

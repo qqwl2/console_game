@@ -26,12 +26,12 @@ Robot_factory::create(const std::string& type, int id) {
 #include "src/entities/module/module_type/living_place.hpp"
 
 Module_factory::Module_factory() {
-  creators["archive"] = [](int id) { return std::make_unique<Archive>(id); };
-  creators["command_center"] = [](int id) { return std::make_unique<Command_center>(id); };
-  creators["generator"] = [](int id) { return std::make_unique<Generator>(id); };
-  creators["living_place"] = [](int id) { return std::make_unique<Living_place>(id); };
+  creators["archive"] = [](int id) { return std::make_shared<Archive>(id); };
+  creators["command_center"] = [](int id) { return std::make_shared<Command_center>(id); };
+  creators["generator"] = [](int id) { return std::make_shared<Generator>(id); };
+  creators["living_place"] = [](int id) { return std::make_shared<Living_place>(id); };
 }
-std::unique_ptr<Module>
+std::shared_ptr<Module>
 Module_factory::create(const std::string& type, int id) {
   if (creators.contains(type)) {
     return creators[type](id);
