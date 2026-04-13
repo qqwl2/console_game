@@ -7,7 +7,6 @@
 
 int
 main() {
-  srand(static_cast<unsigned int>(NULL));
   std::ios_base::sync_with_stdio(false);
 
   Robot_factory  robot_factory;
