@@ -90,3 +90,10 @@ Robot::operator+(Robot& robot) {
     return 2; // 2 - сохранили во второй объект и удаляем первый
   }
 }
+void
+Robot::damage_firmware(int damage) {
+  firmware_integrity -= damage;
+  if (firmware_integrity < INTEGRITY_MIN) {
+    firmware_integrity = INTEGRITY_MIN;
+  }
+}

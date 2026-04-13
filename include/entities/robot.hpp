@@ -33,5 +33,6 @@ public:
   Robot&              operator--();
   Robot&              operator++();
   int                 operator+(Robot& robot);
+  void                damage_firmware(int damage);
   virtual ~Robot() = default;
 };

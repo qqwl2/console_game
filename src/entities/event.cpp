@@ -1,8 +1,9 @@
+#include <format>
 #include <include/entities/event.hpp>
 
 void
-Event::add_events(const std::string event) {
-  events.push_back(event);
+Event::add_events(const std::string event, int day) {
+  events.push_back(std::format("День {}: {}", day, event));
 }
 void
 Event::remove_events() {

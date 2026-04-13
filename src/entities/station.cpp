@@ -1,7 +1,40 @@
 #include "src/core/input.hpp"
+#include "src/utils/utils.hpp"
+#include <format>
 #include <include/entities/station.hpp>
+#include <include/entities/storm_errors.hpp>
 #include <include/utils/constants.hpp>
 #include <iostream>
+
+void
+throw_storm_error() {
+  if (static_cast<int>(random(0, 100)) > 50) {
+    return;
+  }
+  int storm_error = static_cast<int>(random(0, 100));
+  if (storm_error < 33) {
+    throw Power_surge_exception();
+  } else if (storm_error < 66) {
+    throw Firmware_glitch_exception();
+  } else {
+    throw Meteor_strike_exception();
+  }
+}
+
+void
+Station::storm_errors() {
+  if (day < DAY_BEFORE_STORM) {
+    return;
+  }
+  if (storm_days > 0) {
+    return;
+  }
+  int strom_chance = static_cast<int>(random(0, 100));
+  if (strom_chance > STORM_CHANCE) {
+    return;
+  }
+  storm_days = static_cast<int>(random(2, 5));
+}
 
 Station::Station(Module_factory& _module_factory, Robot_factory& _robot_factory)
   : name("")
@@ -11,7 +44,8 @@ Station::Station(Module_factory& _module_factory, Robot_factory& _robot_factory)
   , module_manager()
   , events()
   , module_factory(_module_factory)
-  , robot_factory(_robot_factory) {
+  , robot_factory(_robot_factory)
+  , storm_days(0) {
   name = get_station_name();
 
   for (int i = 0; i < 2; i++) {
@@ -24,7 +58,7 @@ Station::Station(Module_factory& _module_factory, Robot_factory& _robot_factory)
   module_manager.add_module(module_factory, "command_center");
   module_manager.add_module(module_factory, "generator");
 
-  events.add_events("Создана станция с именем " + name);
+  events.add_events("Создана станция с именем " + name, day);
 }
 int
 Station::new_day() {
@@ -43,11 +77,31 @@ Station::new_day() {
   robot_manager.delete_corpse();
   robot_manager.robot_new_day();
 
-  int signal_chance = calculate_signal_chance();
-  if (signal_chance > 50) {
-    resources_manager.add_bits(500);
+  if (!storm_days) {
+    int signal_chance = calculate_signal_chance();
+    if (signal_chance > 50) {
+      resources_manager.add_bits(500);
+    }
   }
-
+  try {
+    storm_errors();
+    if (storm_days != 0) {
+      events.add_events(
+        std::format("Станция попала в шторм.. До конца шторма: {} дней", storm_days), day);
+      storm_days--;
+      throw_storm_error();
+    }
+  } catch (const Power_surge_exception& e) {
+    events.add_events(e.what(), day);
+    resources_manager.add_energy(-50);
+  } catch (const Firmware_glitch_exception& e) {
+    events.add_events(e.what(), day);
+    robot_manager.damage_firmware(10);
+  } catch (const Meteor_strike_exception& e) {
+    events.add_events(e.what(), day);
+    module_manager.module_toggle(
+      static_cast<int>(random(0, module_manager.get_number_of_modules())));
+  }
   if (resources_manager.get_bits() <= 0 || resources_manager.get_energy() <= 0) {
     return 0;
   }
@@ -78,6 +132,10 @@ Station::get_module_manager() {
 Event&
 Station::get_events() {
   return events;
+}
+int
+Station::get_days() const {
+  return day;
 }
 int
 Station::robot_purchase(const std::string type, const int _energy, const int _bits) {

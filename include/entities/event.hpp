@@ -9,6 +9,6 @@ private:
   std::vector<std::string> events;
 
 public:
-  void add_events(const std::string event);
+  void add_events(const std::string event, int day);
   void remove_events();
 };

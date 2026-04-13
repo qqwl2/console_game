@@ -25,4 +25,5 @@ public:
   long unsigned int get_number_of_robots() const;
   int               synthesis(const int _first_index, const int _second_index);
   void              remove_robot(const int _id);
+  void              damage_firmware(int damage);
 };

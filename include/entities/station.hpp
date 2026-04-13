@@ -20,6 +20,10 @@ private:
   Module_factory& module_factory;
   Robot_factory&  robot_factory;
 
+  int storm_days;
+
+  void storm_errors();
+
 public:
   Station(Module_factory& module_factory, Robot_factory& robot_factory);
   int                new_day();
@@ -28,6 +32,7 @@ public:
   Robot_manager&     get_robot_manager();
   Module_manager&    get_module_manager();
   Event&             get_events();
+  int                get_days() const;
   int                robot_purchase(const std::string type, int _energy, int _bits);
   int                module_purchase(const std::string type, int _energy, int _bits);
 };

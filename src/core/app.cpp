@@ -55,7 +55,7 @@ App::module_toggle(Station& station, Iinterface& interface) {
     if (module_toggle_menu == 0) {
       return 0;
     } else if (station.get_module_manager().module_toggle(module_toggle_menu - 1)) {
-      station.get_events().add_events("Модуль был переключен");
+      station.get_events().add_events("Модуль был переключен", station.get_days());
     } else {
       interface.problem_output("Это нельзя отключать");
     }
@@ -74,7 +74,7 @@ App::module_upgrade(Station& station, Iinterface& interface) {
       return 0;
     } else if (station.get_module_manager().module_upgrade(station.get_resources_manager(),
                                                            module_upgrade_menu - 1)) {
-      station.get_events().add_events("Модуль был улучшен");
+      station.get_events().add_events("Модуль был улучшен", station.get_days());
     } else {
       interface.resources_deficit();
     }
@@ -93,28 +93,28 @@ App::module_purchase(Station& station, Iinterface& interface) {
         return 0;
       case 1:
         if (station.module_purchase("archive", PURCHASE_COST, PURCHASE_COST)) {
-          station.get_events().add_events("Архив был куплен");
+          station.get_events().add_events("Архив был куплен", station.get_days());
           break;
         }
         interface.resources_deficit();
         break;
       case 2:
         if (station.module_purchase("command_center", PURCHASE_COST, PURCHASE_COST)) {
-          station.get_events().add_events("Командный центр был куплен");
+          station.get_events().add_events("Командный центр был куплен", station.get_days());
           break;
         }
         interface.resources_deficit();
         break;
       case 3:
         if (station.module_purchase("living_place", PURCHASE_COST, PURCHASE_COST)) {
-          station.get_events().add_events("Жилой отсек был куплен");
+          station.get_events().add_events("Жилой отсек был куплен", station.get_days());
           break;
         }
         interface.resources_deficit();
         break;
       case 4:
         if (station.module_purchase("generator", PURCHASE_COST, PURCHASE_COST)) {
-          station.get_events().add_events("Генератор был куплен");
+          station.get_events().add_events("Генератор был куплен", station.get_days());
           break;
         }
         interface.resources_deficit();
@@ -135,14 +135,14 @@ App::robot_purchase(Station& station, Iinterface& interface) {
         return 0;
       case 1:
         if (station.robot_purchase("keeper", PURCHASE_COST, PURCHASE_COST * 2)) {
-          station.get_events().add_events("keeper был куплен");
+          station.get_events().add_events("keeper был куплен", station.get_days());
           break;
         }
         interface.resources_deficit();
         break;
       case 2:
         if (station.robot_purchase("integrator", PURCHASE_COST * 2, PURCHASE_COST)) {
-          station.get_events().add_events("integrator был куплен");
+          station.get_events().add_events("integrator был куплен", station.get_days());
           break;
         }
         interface.resources_deficit();
@@ -168,7 +168,7 @@ App::module_synthesis(Station& station, Iinterface& interface) {
       interface.problem_output("Модули не могут быть одинаковые");
     } else if (station.get_module_manager().synthesis(first_module_menu - 1,
                                                       second_module_menu - 1)) {
-      station.get_events().add_events("Модуль был синтезирован");
+      station.get_events().add_events("Модуль был синтезирован", station.get_days());
     }
     interface.delay(300);
   }
@@ -189,7 +189,7 @@ App::robot_synthesis(Station& station, Iinterface& interface) {
     } else if (first_robot_menu == second_robot_menu) {
       interface.problem_output("Роботы не могут быть одинаковые");
     } else if (station.get_robot_manager().synthesis(first_robot_menu - 1, second_robot_menu - 1)) {
-      station.get_events().add_events("Робот был синтезирован");
+      station.get_events().add_events("Робот был синтезирован", station.get_days());
     }
     interface.delay(300);
   }
