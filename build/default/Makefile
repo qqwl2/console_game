@@ -6,7 +6,11 @@ OBJ = obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_man
 	obj/robot_manager.o obj/archive.o obj/command_center.o obj/generator.o \
 	obj/living_place.o obj/module.o obj/integrator.o obj/keeper.o obj/robot.o \
 	obj/event.o obj/factory.o obj/station.o obj/console_interface.o \
-	obj/ostream_operators.o obj/utils.o
+	obj/ostream_operators.o obj/utils.o \
+	obj/command.o obj/command_factory.o obj/next_day_command.o \
+	obj/buy_robot_command.o obj/buy_module_command.o obj/upgrade_module_command.o \
+	obj/control_module_command.o obj/synthesis_module_command.o \
+	obj/synthesis_robot_command.o obj/analytics_command.o
 
 all: main
 
@@ -65,3 +69,23 @@ obj/ostream_operators.o:
 	$(CC) ../../src/utils/ostream_operators.cpp -o obj/ostream_operators.o
 obj/utils.o:
 	$(CC) ../../src/utils/utils.cpp -o obj/utils.o
+obj/command.o:
+	$(CC) ../../src/core/commands/command.cpp -o obj/command.o
+obj/command_factory.o:
+	$(CC) ../../src/core/commands/command_factory.cpp -o obj/command_factory.o
+obj/next_day_command.o:
+	$(CC) ../../src/core/commands/next_day_command.cpp -o obj/next_day_command.o
+obj/buy_robot_command.o:
+	$(CC) ../../src/core/commands/buy_robot_command.cpp -o obj/buy_robot_command.o
+obj/buy_module_command.o:
+	$(CC) ../../src/core/commands/buy_module_command.cpp -o obj/buy_module_command.o
+obj/upgrade_module_command.o:
+	$(CC) ../../src/core/commands/upgrade_module_command.cpp -o obj/upgrade_module_command.o
+obj/control_module_command.o:
+	$(CC) ../../src/core/commands/control_module_command.cpp -o obj/control_module_command.o
+obj/synthesis_module_command.o:
+	$(CC) ../../src/core/commands/synthesis_module_command.cpp -o obj/synthesis_module_command.o
+obj/synthesis_robot_command.o:
+	$(CC) ../../src/core/commands/synthesis_robot_command.cpp -o obj/synthesis_robot_command.o
+obj/analytics_command.o:
+	$(CC) ../../src/core/commands/analytics_command.cpp -o obj/analytics_command.o
