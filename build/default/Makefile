@@ -7,7 +7,7 @@ OBJ = obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_man
 	obj/living_place.o obj/module.o obj/integrator.o obj/keeper.o obj/robot.o \
 	obj/event.o obj/factory.o obj/station.o obj/console_interface.o \
 	obj/ostream_operators.o obj/utils.o \
-	obj/command.o obj/command_factory.o obj/next_day_command.o \
+	obj/command_factory.o obj/next_day_command.o \
 	obj/buy_robot_command.o obj/buy_module_command.o obj/upgrade_module_command.o \
 	obj/control_module_command.o obj/synthesis_module_command.o \
 	obj/synthesis_robot_command.o obj/analytics_command.o
@@ -69,8 +69,6 @@ obj/ostream_operators.o:
 	$(CC) ../../src/utils/ostream_operators.cpp -o obj/ostream_operators.o
 obj/utils.o:
 	$(CC) ../../src/utils/utils.cpp -o obj/utils.o
-obj/command.o:
-	$(CC) ../../src/core/commands/command.cpp -o obj/command.o
 obj/command_factory.o:
 	$(CC) ../../src/core/commands/command_factory.cpp -o obj/command_factory.o
 obj/next_day_command.o:
