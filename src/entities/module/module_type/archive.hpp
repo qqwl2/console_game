@@ -6,4 +6,5 @@ public:
   Archive(int _id);
   void        upgrade() override;
   std::string get_name() const override;
+  void        storm_reaction() override;
 };

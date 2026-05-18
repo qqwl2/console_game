@@ -18,6 +18,7 @@ class Console_interface : public Iinterface {
   void roll_call(Station& station) override;
   void inventory(Station& station) override;
   void loss_assessment(Station& station) override;
+  void end_game(Station& station) override;
 
   int request_value(int min, const unsigned long int max) override;
 };

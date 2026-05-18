@@ -20,3 +20,8 @@ int
 Command_center::toggle_active() {
   return 0;
 }
+void
+Command_center::storm_reaction() {
+  energy--;
+  bits--;
+};

@@ -7,4 +7,5 @@ public:
   void        upgrade() override;
   std::string get_name() const override;
   int         toggle_active() override;
+  void        storm_reaction() override;
 };

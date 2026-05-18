@@ -1,11 +1,12 @@
 #pragma once
 #include <include/entities/factory.hpp>
 #include <include/entities/managers/resources_manager.hpp>
+#include <include/entities/observer.hpp>
 #include <include/entities/robot.hpp>
 #include <iostream>
 #include <vector>
 
-class Robot_manager {
+class Robot_manager : public Observer {
   friend std::ostream& operator<<(std::ostream& os, const Robot_manager& robot_manager);
 
 private:
@@ -14,18 +15,21 @@ private:
   int robot_id;
 
 public:
+  Robot_manager(Subject& subject);
   void              add_robot(Robot_factory& robot_factory, const std::string type);
   void              damage_robots();
   void              delete_corpse();
   void              repair_robots(Resources_manager& resources_manager);
   void              robot_new_day();
   void              robot_placement(const int living_places);
-  int               calculate_energy();
-  int               calculate_bits();
+  int               calculate_energy() const;
+  int               calculate_bits() const;
   long unsigned int get_number_of_robots() const;
   int               synthesis(const int _first_index, const int _second_index);
   void              remove_robot(const int _id);
   void              damage_firmware(int damage);
   void              sort_robots();
   int               loss_assessment() const;
+  void              storm_reaction();
+  void              update(const std::string& message) override;
 };

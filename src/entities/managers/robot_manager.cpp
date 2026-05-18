@@ -2,11 +2,12 @@
 #include <include/entities/managers/robot_manager.hpp>
 #include <include/utils/constants.hpp>
 
+Robot_manager::Robot_manager(Subject& subject)
+  : Observer(subject) {}
 void
 Robot_manager::add_robot(Robot_factory& robot_factory, const std::string type) {
   robots.push_back(robot_factory.create(type, robot_id++));
 }
-
 void
 Robot_manager::damage_robots() {
   std::for_each(robots.begin(), robots.end(), [](auto& robot) { --*robot; });
@@ -49,12 +50,12 @@ Robot_manager::robot_placement(const int living_places) {
   }
 }
 int
-Robot_manager::calculate_energy() {
+Robot_manager::calculate_energy() const {
   return std::ranges::fold_left(
     robots, 0, [](int sum, const auto& robot) { return sum + robot->get_energy(); });
 }
 int
-Robot_manager::calculate_bits() {
+Robot_manager::calculate_bits() const {
   return std::ranges::fold_left(
     robots, 0, [](int sum, const auto& robot) { return sum + robot->get_bits(); });
 }
@@ -94,4 +95,14 @@ int
 Robot_manager::loss_assessment() const {
   return static_cast<int>(std::ranges::count_if(
     robots, [](const auto& robot) { return robot->get_chassis_integrity() < 50; }));
+}
+void
+Robot_manager::storm_reaction() {
+  std::ranges::for_each(robots, [](auto& robot) { robot->storm_reaction(); });
+}
+void
+Robot_manager::update(const std::string& message) {
+  if (message == "storm") {
+    storm_reaction();
+  }
 }

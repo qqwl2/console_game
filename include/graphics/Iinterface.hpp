@@ -19,6 +19,7 @@ public:
   virtual void roll_call(Station& station) = 0;
   virtual void inventory(Station& station) = 0;
   virtual void loss_assessment(Station& station) = 0;
+  virtual void end_game(Station& station) = 0;
 
   virtual int request_value(const int min, const unsigned long int max) = 0;
 };

@@ -10,7 +10,8 @@ OBJ = obj/default.o obj/app.o obj/input.o obj/module_manager.o obj/resources_man
 	obj/command_factory.o obj/next_day_command.o \
 	obj/buy_robot_command.o obj/buy_module_command.o obj/upgrade_module_command.o \
 	obj/control_module_command.o obj/synthesis_module_command.o \
-	obj/synthesis_robot_command.o obj/analytics_command.o
+	obj/synthesis_robot_command.o obj/analytics_command.o obj/observer.o \
+	obj/end_game.o
 
 all: main
 
@@ -87,3 +88,7 @@ obj/synthesis_robot_command.o:
 	$(CC) ../../src/core/commands/synthesis_robot_command.cpp -o obj/synthesis_robot_command.o
 obj/analytics_command.o:
 	$(CC) ../../src/core/commands/analytics_command.cpp -o obj/analytics_command.o
+obj/observer.o:
+	$(CC) ../../src/entities/observer.cpp -o obj/observer.o
+obj/end_game.o:
+	$(CC) ../../src/core/commands/end_game.cpp -o obj/end_game.o

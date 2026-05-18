@@ -17,6 +17,7 @@ frame_menu() {
   std::cout << "| 6. Модульная сборка                                      |" << std::endl;
   std::cout << "| 7. Синтез сознания                                       |" << std::endl;
   std::cout << "| 8. Аналитика                                             |" << std::endl;
+  std::cout << "| 9. Постройка квантового навигационного маяка             |" << std::endl;
   std::cout << "| 0. Выход                                                 |" << std::endl;
   std::cout << "Выберите команду > " << std::endl;
 }
@@ -124,4 +125,14 @@ void
 Console_interface::loss_assessment(Station& station) {
   std::cout << "Количество поврежденных роботов: " << station.get_robot_manager().loss_assessment()
             << std::endl;
+}
+void
+Console_interface::end_game(Station& station) {
+  std::cout
+    << "Ковчег успешно вышел на орбиту Земли-2... Теперь он до скончания веков будет в безопасности"
+    << std::endl;
+  std::cout << "Поздравляем! Вы достигли конца игры..." << std::endl;
+  std::cout << "Это был сложный путь..\nДавайте посмотрим на вашу статистику.." << std::endl;
+  std::cout << station.get_end_game_stats();
+  std::cout << "А стараться кто будет? Я что ли? Что за позор?" << std::endl;
 }

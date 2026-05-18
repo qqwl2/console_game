@@ -10,4 +10,5 @@ public:
   void        upgrade() override;
   std::string get_name() const override;
   int         get_alive_places() const override;
+  void        storm_reaction() override;
 };

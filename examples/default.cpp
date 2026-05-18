@@ -9,10 +9,7 @@ int
 main() {
   std::ios_base::sync_with_stdio(false);
 
-  Robot_factory  robot_factory;
-  Module_factory module_factory;
-
-  Station station(module_factory, robot_factory);
+  Station& station = Station::get_instance();
 
   Console_interface interface;
 

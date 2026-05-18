@@ -17,3 +17,8 @@ std::string
 Archive::get_name() const {
   return "Archive";
 }
+void
+Archive::storm_reaction() {
+  upgrade();
+  energy += 5;
+};

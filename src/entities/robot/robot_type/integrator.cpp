@@ -1,4 +1,5 @@
 #include "integrator.hpp"
+#include "src/utils/utils.hpp"
 
 std::string
 generate_integrator_name() {
@@ -21,3 +22,11 @@ std::string
 Integrator::get_type_str() const {
   return "INTEGR";
 }
+void
+Integrator::storm_reaction() {
+  if (random(-1, 1) > 0) {
+    bits++;
+  } else {
+    bits--;
+  };
+};

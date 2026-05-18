@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <deque>
 
 class Event {
   friend std::ostream& operator<<(std::ostream& os, const Event& event);
 
 private:
-  std::vector<std::string> events;
+  std::deque<std::string> events;
 
 public:
   void add_events(const std::string event, int day);

@@ -21,6 +21,7 @@ protected:
 public:
   Robot(const int _id, const float _resources_efficiency);
   virtual std::string get_type_str() const = 0;
+  virtual void        storm_reaction() = 0;
   int                 get_chassis_integrity() const;
   int                 get_firmware_integrity() const;
   int                 get_energy() const;

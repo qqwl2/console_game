@@ -23,3 +23,7 @@ Living_place::get_alive_places() const {
   }
   return 0;
 }
+void
+Living_place::storm_reaction() {
+  upgrade_cost += 20;
+};

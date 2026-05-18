@@ -10,5 +10,4 @@ Event::remove_events() {
   while (events.size() > 5) {
     events.erase(events.begin(), events.end() - 5);
   }
-  events.shrink_to_fit();
 }

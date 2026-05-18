@@ -1,10 +1,44 @@
 #include "src/core/input.hpp"
 #include "src/utils/utils.hpp"
 #include <format>
+#include <include/entities/factory.hpp>
 #include <include/entities/station.hpp>
 #include <include/entities/storm_errors.hpp>
 #include <include/utils/constants.hpp>
 #include <iostream>
+#include <memory>
+
+Station&
+Station::get_instance() {
+  static Station instance;
+  return instance;
+}
+
+Station::Station()
+  : name("")
+  , day(1)
+  , subject()
+  , resources_manager(1000, 1000, MAX_ENERGY, MAX_BITS)
+  , robot_manager(subject)
+  , module_manager(subject)
+  , events()
+  , module_factory()
+  , robot_factory()
+  , storm_days(0) {
+  name = get_station_name();
+
+  for (int i = 0; i < 2; i++) {
+    robot_manager.add_robot(robot_factory, "integrator");
+    robot_manager.add_robot(robot_factory, "keeper");
+  }
+
+  module_manager.add_module(module_factory, "archive");
+  module_manager.add_module(module_factory, "living_place");
+  module_manager.add_module(module_factory, "command_center");
+  module_manager.add_module(module_factory, "generator");
+
+  events.add_events("Создана станция с именем " + name, day);
+}
 
 void
 throw_storm_error() {
@@ -35,30 +69,35 @@ Station::storm_errors() {
   }
   storm_days = static_cast<int>(random(2, 5));
 }
-
-Station::Station(Module_factory& _module_factory, Robot_factory& _robot_factory)
-  : name("")
-  , day(1)
-  , resources_manager(1000, 1000, 10000, 10000)
-  , robot_manager()
-  , module_manager()
-  , events()
-  , module_factory(_module_factory)
-  , robot_factory(_robot_factory)
-  , storm_days(0) {
-  name = get_station_name();
-
-  for (int i = 0; i < 2; i++) {
-    robot_manager.add_robot(robot_factory, "integrator");
-    robot_manager.add_robot(robot_factory, "keeper");
+void
+Station::error_handling() {
+  bool event_hapenned = false;
+  try {
+    storm_errors();
+    if (storm_days != 0) {
+      events.add_events(
+        std::format("Станция попала в шторм.. До конца шторма: {} дней", storm_days), day);
+      storm_days--;
+      throw_storm_error();
+    }
+  } catch (const Power_surge_exception& e) {
+    events.add_events(e.what(), day);
+    resources_manager.add_energy(-50);
+    event_hapenned = true;
+  } catch (const Firmware_glitch_exception& e) {
+    events.add_events(e.what(), day);
+    robot_manager.damage_firmware(10);
+    event_hapenned = true;
+  } catch (const Meteor_strike_exception& e) {
+    events.add_events(e.what(), day);
+    module_manager.module_toggle(
+      static_cast<int>(random(0, static_cast<double>(module_manager.get_number_of_modules()))));
+    event_hapenned = true;
   }
-
-  module_manager.add_module(module_factory, "archive");
-  module_manager.add_module(module_factory, "living_place");
-  module_manager.add_module(module_factory, "command_center");
-  module_manager.add_module(module_factory, "generator");
-
-  events.add_events("Создана станция с именем " + name, day);
+  if (event_hapenned) {
+    subject.set_event("storm");
+    subject.notify();
+  }
 }
 int
 Station::new_day() {
@@ -83,25 +122,7 @@ Station::new_day() {
       resources_manager.add_bits(500);
     }
   }
-  try {
-    storm_errors();
-    if (storm_days != 0) {
-      events.add_events(
-        std::format("Станция попала в шторм.. До конца шторма: {} дней", storm_days), day);
-      storm_days--;
-      throw_storm_error();
-    }
-  } catch (const Power_surge_exception& e) {
-    events.add_events(e.what(), day);
-    resources_manager.add_energy(-50);
-  } catch (const Firmware_glitch_exception& e) {
-    events.add_events(e.what(), day);
-    robot_manager.damage_firmware(10);
-  } catch (const Meteor_strike_exception& e) {
-    events.add_events(e.what(), day);
-    module_manager.module_toggle(
-      static_cast<int>(random(0, static_cast<double>(module_manager.get_number_of_modules()))));
-  }
+  error_handling();
   if (resources_manager.get_bits() <= 0 || resources_manager.get_energy() <= 0) {
     return 0;
   }
@@ -159,4 +180,25 @@ Station::module_purchase(const std::string type, const int _energy, const int _b
     return 1;
   }
   return 0;
+}
+std::string
+Station::get_end_game_stats() const {
+  std::string msg;
+  msg += "Дни: " + std::to_string(get_days()) + "\n";
+  msg += "Количество роботов: " + std::to_string(robot_manager.get_number_of_robots()) + "\n";
+  msg += "Количество модулей: " + std::to_string(module_manager.get_number_of_modules()) + "\n";
+  int scores = robot_manager.calculate_bits() + module_manager.calculate_bits() +
+               robot_manager.calculate_energy() + module_manager.calculate_energy() +
+               10 * static_cast<int>(robot_manager.get_number_of_robots()) +
+               20 * static_cast<int>(module_manager.get_number_of_modules());
+  msg += "Заработанные очки: " + std::to_string(scores) + "\n";
+  return msg;
+}
+bool
+Station::end_game() const {
+  if (resources_manager.get_bits() >= END_GAME_BITS_COST &&
+      resources_manager.get_energy() >= END_GAME_ENEGY_COST) {
+    return true;
+  }
+  return false;
 }

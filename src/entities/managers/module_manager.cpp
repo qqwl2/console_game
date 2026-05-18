@@ -1,18 +1,19 @@
 #include <algorithm>
 #include <include/entities/managers/module_manager.hpp>
 
+Module_manager::Module_manager(Subject& subject)
+  : Observer(subject) {}
 void
 Module_manager::add_module(Module_factory& module_factory, const std::string type) {
   modules.push_back(module_factory.create(type, module_id++));
 }
-
 int
-Module_manager::calculate_energy() {
+Module_manager::calculate_energy() const {
   return std::ranges::fold_left(
     modules, 0, [](int sum, const auto& module) { return sum + module->get_energy(); });
 }
 int
-Module_manager::calculate_bits() {
+Module_manager::calculate_bits() const {
   return std::ranges::fold_left(
     modules, 0, [](int sum, const auto& module) { return sum + module->get_bits(); });
 }
@@ -65,4 +66,14 @@ Module_manager::remove_module(const int _id) {
 void
 Module_manager::sort_modules() {
   std::ranges::sort(modules, std::less{}, [](const auto& module) { return module->get_name(); });
+}
+void
+Module_manager::storm_reaction() {
+  std::ranges::for_each(modules, [](auto& module) { module->storm_reaction(); });
+}
+void
+Module_manager::update(const std::string& message) {
+  if (message == "storm") {
+    storm_reaction();
+  }
 }

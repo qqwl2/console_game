@@ -1,4 +1,5 @@
 #include "keeper.hpp"
+#include "src/utils/utils.hpp"
 
 std::string
 generate_keeper_name() {
@@ -21,3 +22,11 @@ std::string
 Keeper::get_type_str() const {
   return "KEEPER";
 }
+void
+Keeper::storm_reaction() {
+  if (random(-1, 1) > 0) {
+    energy++;
+  } else {
+    energy--;
+  };
+};

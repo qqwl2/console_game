@@ -15,3 +15,7 @@ std::string
 Generator::get_name() const {
   return "Generator";
 }
+void
+Generator::storm_reaction() {
+  energy--;
+};
